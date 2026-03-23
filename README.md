@@ -1,2 +1,2 @@
 # ai-ds
-Aigentic design system creation
+Agentic design system creation
