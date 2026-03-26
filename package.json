@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "sync:tokens": "node scripts/sync-tokens.mjs",
     "lint:tokens": "node scripts/check-tokens.mjs",
     "lint:components": "node scripts/check-components.mjs",
     "lint": "npm run lint:tokens && npm run lint:components",

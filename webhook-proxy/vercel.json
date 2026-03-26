@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/figma-webhook.js": {
+      "maxDuration": 10
+    }
+  }
+}

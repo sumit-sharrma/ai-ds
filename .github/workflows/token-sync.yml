@@ -1,0 +1,89 @@
+name: Token Sync (Figma → tokens.json)
+
+on:
+  # Triggered by the Figma webhook proxy (see docs/figma-webhook-setup.md)
+  repository_dispatch:
+    types: [figma-variables-updated]
+
+  # Fallback: run daily at 02:00 UTC to catch any missed webhooks
+  schedule:
+    - cron: '0 2 * * *'
+
+  # Allow manual trigger from GitHub UI for testing
+  workflow_dispatch:
+
+jobs:
+  sync:
+    name: Fetch variables and update tokens.json
+    runs-on: ubuntu-latest
+
+    # Only allow one sync job at a time — prevents race conditions if two
+    # Figma events fire in quick succession
+    concurrency:
+      group: token-sync
+      cancel-in-progress: false
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Use a token that can push branches and open PRs
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch variables from Figma and update tokens.json
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          FIGMA_FILE_KEY: EqXU8re4hw6XM6OrwaBbu8
+        run: node scripts/sync-tokens.mjs
+
+      - name: Check if tokens.json changed
+        id: diff
+        run: |
+          if git diff --quiet tokens.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run token integrity check
+        if: steps.diff.outputs.changed == 'true'
+        run: node scripts/check-tokens.mjs
+
+      - name: Run component completeness check
+        if: steps.diff.outputs.changed == 'true'
+        run: node scripts/check-components.mjs
+
+      - name: Open pull request with updated tokens
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GH_PAT }}
+          branch: chore/token-sync-${{ github.run_number }}
+          base: staging
+          commit-message: 'chore(tokens): sync from Figma variables'
+          title: 'chore(tokens): sync design tokens from Figma'
+          body: |
+            ## Automated token sync
+
+            This PR was opened automatically after a Figma variable update was detected.
+
+            **What changed:** `tokens.json` has been updated to reflect the latest
+            variable values from the Figma file.
+
+            **Next steps:**
+            1. Review the diff in `tokens.json`
+            2. Check the Chromatic visual regression report on this PR
+            3. Merge when approved
+
+            ---
+            *Triggered by: `${{ github.event_name }}`*
+          labels: tokens, automated
