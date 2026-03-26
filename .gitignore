@@ -1,0 +1,9 @@
+.claude/worktrees
+.worktrees/
+worktrees/
+
+.DS_Store
+
+*storybook.log
+storybook-static
+node_modules

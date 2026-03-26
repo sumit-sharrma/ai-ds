@@ -1,0 +1,30 @@
+name: Component Completeness Check
+
+on:
+  push:
+    branches: [main, staging]
+    paths:
+      - 'src/components/**'
+      - 'scripts/check-components.mjs'
+  pull_request:
+    branches: [main, staging]
+    paths:
+      - 'src/components/**'
+      - 'scripts/check-components.mjs'
+
+jobs:
+  component-check:
+    name: All components have required files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run component completeness check
+        run: node scripts/check-components.mjs
