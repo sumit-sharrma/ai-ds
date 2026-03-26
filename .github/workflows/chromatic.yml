@@ -1,0 +1,41 @@
+name: Chromatic
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main, staging]
+
+jobs:
+  chromatic:
+    name: Storybook publish + visual regression
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Full git history is required for Chromatic to detect which stories changed
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          # Only test stories whose source files changed — faster on PRs
+          onlyChanged: true
+          # On pushes to main, auto-accept visual changes (already reviewed in PR)
+          # On PRs, require explicit approval in the Chromatic UI
+          autoAcceptChanges: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging' }}
+          # Exit 0 when visual changes are detected — marks them for review
+          # rather than hard-failing the build
+          exitZeroOnChanges: true

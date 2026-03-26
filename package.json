@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint:tokens": "node scripts/check-tokens.mjs",
+    "lint:components": "node scripts/check-components.mjs",
+    "lint": "npm run lint:tokens && npm run lint:components",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "repository": {
     "type": "git",
@@ -37,6 +41,7 @@
     "@storybook/react-vite": "^10.3.3",
     "@vitest/browser-playwright": "^4.1.1",
     "@vitest/coverage-v8": "^4.1.1",
+    "chromatic": "^11.29.0",
     "playwright": "^1.58.2",
     "storybook": "^10.3.3",
     "vitest": "^4.1.1"
