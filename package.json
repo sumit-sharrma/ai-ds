@@ -41,7 +41,7 @@
     "@storybook/react-vite": "^10.3.3",
     "@vitest/browser-playwright": "^4.1.1",
     "@vitest/coverage-v8": "^4.1.1",
-    "chromatic": "^11.29.0",
+    "chromatic": "^16.0.0",
     "playwright": "^1.58.2",
     "storybook": "^10.3.3",
     "vitest": "^4.1.1"
