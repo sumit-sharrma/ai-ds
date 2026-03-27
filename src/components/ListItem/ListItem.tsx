@@ -1,5 +1,5 @@
 import React, { useMemo, CSSProperties } from 'react';
-import tokens from '../../../tokens.json';
+import tokens from '../../lib/tokens';
 import type { ListItemProps } from './ListItem.types';
 
 const P = tokens.Primitives;

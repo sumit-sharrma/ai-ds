@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo, CSSProperties } from 'react';
-import tokens from '../../../tokens.json';
+import tokens from '../../lib/tokens';
 import type { IconButtonProps, IconButtonVariant, IconButtonSize } from './IconButton.types';
 
 const P = tokens.Primitives;
