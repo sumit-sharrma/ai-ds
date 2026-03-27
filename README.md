@@ -8,7 +8,7 @@ A React component library built with an AI-assisted workflow. Design tokens flow
 
 | | Link |
 |---|---|
-| **Storybook (live)** | [View on Chromatic →](https://www.chromatic.com/library?appId=REPLACE_WITH_CHROMATIC_APP_ID) |
+| **Storybook (live)** | [View on Chromatic →](https://www.chromatic.com/library?appId=69c5540596616ca7d4bb7065) |
 | **Figma file** | [Open in Figma →](https://www.figma.com/design/EqXU8re4hw6XM6OrwaBbu8/Project) |
 | **GitHub repo** | [github.com/sumit-sharrma/ai-ds](https://github.com/sumit-sharrma/ai-ds) |
 | **Component hierarchy** | [COMPONENT_HIERARCHY.md](./COMPONENT_HIERARCHY.md) |
