@@ -63,6 +63,57 @@ function buildSemantics(dark: Record<string, any>, light: Record<string, any>) {
   return result;
 }
 
+// ─── Motion helpers ───────────────────────────────────────────────────────────
+
+const M = P_raw.motion as Record<string, Record<string, { $value: any }>>;
+
+/**
+ * Motion duration token → number of milliseconds.
+ *
+ * @example
+ * dur('normal')  // → 200
+ * dur('fast')    // → 100
+ */
+export function dur(key: 'instant' | 'fast' | 'normal' | 'slow' | 'slower'): number {
+  return M.duration[key].$value as number;
+}
+
+/**
+ * Motion easing token → CSS cubic-bezier string.
+ *
+ * @example
+ * ease('ease-out')   // → 'cubic-bezier(0, 0, 0.2, 1)'
+ * ease('spring')     // → 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+ */
+export function ease(
+  key: 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'spring'
+): string {
+  return M.easing[key].$value as string;
+}
+
+/**
+ * Compose a CSS transition shorthand from motion tokens.
+ *
+ * @example
+ * motion('background-color', 'normal', 'ease-in-out')
+ * // → 'background-color 200ms cubic-bezier(0.4, 0, 0.2, 1)'
+ *
+ * motion('opacity', 'fast', 'ease-out', 50)
+ * // → 'opacity 100ms cubic-bezier(0, 0, 0.2, 1) 50ms'
+ */
+export function motion(
+  property: string,
+  duration: 'instant' | 'fast' | 'normal' | 'slow' | 'slower',
+  easing: 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'spring',
+  delayMs = 0
+): string {
+  const d = dur(duration);
+  const e = ease(easing);
+  return delayMs > 0
+    ? `${property} ${d}ms ${e} ${delayMs}ms`
+    : `${property} ${d}ms ${e}`;
+}
+
 // ─── Exports ──────────────────────────────────────────────────────────────────
 
 export const Primitives = P_raw;

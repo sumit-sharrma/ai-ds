@@ -1,0 +1,27 @@
+name: Figma Design Audit
+
+on:
+  schedule:
+    # Run daily at 09:00 UTC — catches any overnight design changes
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    # Allow manual runs from the GitHub UI
+
+jobs:
+  audit:
+    name: Audit for detached instances and hardcoded fills
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Figma audit
+        run: node scripts/audit-figma.mjs
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}

@@ -69,7 +69,8 @@ function collectFiles(dir) {
       !entry.endsWith('.stories.ts') &&
       !entry.endsWith('.test.tsx') &&
       !entry.endsWith('.test.ts') &&
-      !entry.endsWith('.types.ts') // type-only files have no runtime values
+      !entry.endsWith('.types.ts') && // type-only files have no runtime values
+      !entry.endsWith('.figma.tsx') // Code Connect files are not component implementations
     ) {
       files.push(fullPath);
     }
