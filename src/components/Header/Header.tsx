@@ -1,5 +1,5 @@
 import React, { useMemo, CSSProperties } from 'react';
-import tokens from '../../../tokens.json';
+import tokens from '../../lib/tokens';
 import { IconButton } from '../IconButton';
 import type { HeaderProps } from './Header.types';
 

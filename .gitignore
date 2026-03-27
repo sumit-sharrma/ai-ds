@@ -7,3 +7,4 @@ worktrees/
 *storybook.log
 storybook-static
 node_modules
+.vercel

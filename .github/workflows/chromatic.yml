@@ -2,9 +2,9 @@ name: Chromatic
 
 on:
   push:
-    branches: [main, staging]
+    branches: [main, staging, tokens]
   pull_request:
-    branches: [main, staging]
+    branches: [main, staging, tokens]
 
 jobs:
   chromatic:

@@ -4,7 +4,7 @@
  * No hardcoded colours, spacing, or typography values.
  */
 import React, { useState, useCallback, useMemo, CSSProperties } from 'react';
-import tokens from '../../../tokens.json';
+import tokens from '../../lib/tokens';
 import type { ButtonProps, ButtonVariant, ButtonState, ButtonTheme } from './Button.types';
 
 const P = tokens.Primitives;
