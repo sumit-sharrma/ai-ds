@@ -9,12 +9,12 @@
  * shape that all components rely on, so no component code needs to change.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const raw = require('../../tokens.json') as Record<string, any>;
+import rawTokens from '../../tokens.json';
 
-const P_raw  = raw['Primitives/Value'] as Record<string, any>;
-const S_dark  = raw['Semantics/Dark']  as Record<string, any>;
-const S_light = raw['Semantics/Light'] as Record<string, any>;
+const raw     = rawTokens as unknown as Record<string, any>;
+const P_raw   = raw['Primitives/Value'] as Record<string, any>;
+const S_dark  = raw['Semantics/Dark']   as Record<string, any>;
+const S_light = raw['Semantics/Light']  as Record<string, any>;
 
 // ─── Alias resolver ───────────────────────────────────────────────────────────
 
