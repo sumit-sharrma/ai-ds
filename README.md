@@ -9,7 +9,7 @@ A React component library built with an AI-assisted workflow. Design tokens flow
 | | Link |
 |---|---|
 | **Storybook (live)** | [View on Chromatic →](https://www.chromatic.com/library?appId=69c5540596616ca7d4bb7065) |
-| **Figma file** | [Open in Figma →](https://www.figma.com/design/EqXU8re4hw6XM6OrwaBbu8/Project) |
+| **Figma file** | [Open in Figma →](https://www.figma.com/design/EqXU8re4hw6XM6OrwaBbu8/Project?node-id=80-228) |
 | **GitHub repo** | [github.com/sumit-sharrma/ai-ds](https://github.com/sumit-sharrma/ai-ds) |
 | **Component hierarchy** | [COMPONENT_HIERARCHY.md](./COMPONENT_HIERARCHY.md) |
 | **Contribution guide** | [CONTRIBUTING.md](./CONTRIBUTING.md) |
@@ -42,7 +42,7 @@ A React component library built with an AI-assisted workflow. Design tokens flow
 | AI-readable rules and naming conventions | ✅ | `CLAUDE.md`, `AGENTS.md` |
 | 5 components with props, stories, Code Connect | ✅ | `src/components/` |
 | Edit Profile template (reference design) | ✅ | `src/templates/EditProfile/` |
-| Figma ↔ GitHub token sync (bi-directional) | ✅ | `token-sync.yml` + `code-connect.yml` |
+| Figma ↔ GitHub token sync (bi-directional) | ✅ | `token-sync.yml` + `code-connect.yml` `setup done but my figma plan(Pro) doesn't allow Code Connect`|
 | AI → Figma guard (no duplicates, no hardcoded values) | ✅ | `AGENTS.md` + `figma-audit.yml` |
 | Storybook with a11y, visual regression (Chromatic) | ✅ | `.storybook/`, `chromatic.yml` |
 | Governance — versioning, contribution model, docs | ✅ | `CHANGELOG.md`, `CONTRIBUTING.md` |
