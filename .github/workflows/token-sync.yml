@@ -1,15 +1,11 @@
 name: Token Sync (Figma → tokens.json)
 
 on:
-  # Triggered by the Figma webhook proxy (see docs/figma-webhook-setup.md)
-  repository_dispatch:
-    types: [figma-variables-updated]
-
-  # Fallback: run daily at 02:00 UTC to catch any missed webhooks
+  # Runs every hour — picks up Figma variable changes within 60 minutes
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 * * * *'
 
-  # Allow manual trigger from GitHub UI for testing
+  # Allow manual trigger from GitHub UI for immediate sync
   workflow_dispatch:
 
 jobs:

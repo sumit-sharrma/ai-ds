@@ -2,13 +2,13 @@ name: Token Integrity Check
 
 on:
   push:
-    branches: [main, staging]
+    branches: [main, staging, tokens]
     paths:
       - 'src/components/**'
       - 'tokens.json'
       - 'scripts/check-tokens.mjs'
   pull_request:
-    branches: [main, staging]
+    branches: [main, staging, tokens]
     paths:
       - 'src/components/**'
       - 'tokens.json'

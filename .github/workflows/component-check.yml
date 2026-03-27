@@ -2,12 +2,12 @@ name: Component Completeness Check
 
 on:
   push:
-    branches: [main, staging]
+    branches: [main, staging, tokens]
     paths:
       - 'src/components/**'
       - 'scripts/check-components.mjs'
   pull_request:
-    branches: [main, staging]
+    branches: [main, staging, tokens]
     paths:
       - 'src/components/**'
       - 'scripts/check-components.mjs'
