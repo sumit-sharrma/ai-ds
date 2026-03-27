@@ -1,0 +1,13 @@
+{
+  "codeConnect": {
+    "include": [
+      "src/components/**/*.figma.tsx",
+      "src/components/**/*.tsx",
+      "src/components/**/index.ts",
+      "src/templates/**/*.figma.tsx",
+      "src/templates/**/*.tsx",
+      "src/templates/**/index.ts"
+    ],
+    "parser": "react"
+  }
+}

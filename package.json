@@ -11,7 +11,10 @@
     "lint:tokens": "node scripts/check-tokens.mjs",
     "lint:components": "node scripts/check-components.mjs",
     "lint": "npm run lint:tokens && npm run lint:components",
-    "chromatic": "chromatic --exit-zero-on-changes"
+    "chromatic": "chromatic --exit-zero-on-changes",
+    "code-connect:publish": "figma connect publish",
+    "code-connect:unpublish": "figma connect unpublish",
+    "audit:figma": "node scripts/audit-figma.mjs"
   },
   "repository": {
     "type": "git",
@@ -35,6 +38,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.0",
+    "@figma/code-connect": "^1.4.2",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/addon-onboarding": "^10.3.3",

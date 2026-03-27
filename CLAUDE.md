@@ -17,7 +17,7 @@ Read it in full before creating or modifying any component.
 
 ## Token System
 
-All visual values come from `tokens.json`. Never hardcode colours, spacing, radii, or typography.
+All visual values come from `tokens.json`. Never hardcode colours, spacing, radii, typography, or motion values.
 
 ### Two layers
 
@@ -29,7 +29,7 @@ tokens.Semantics    — semantic aliases with dark/light theme variants
 ### Reading tokens
 
 ```typescript
-import tokens from '../../../tokens.json'; // adjust depth as needed
+import tokens, { dur, ease, motion } from '../../lib/tokens';
 
 const P = tokens.Primitives;
 const S = tokens.Semantics;
@@ -67,6 +67,61 @@ function sem(
 | `P.Font['font-size']['14'].$value`    | "14px" |
 | `P.Font['line-height']['20'].$value`  | "20px" |
 | `P.Font['font-weight']['semi-bold'].$value` | 600 |
+
+### Motion tokens
+
+Motion tokens are accessed via the named helpers exported from `src/lib/tokens.ts`.
+Never hardcode `transition`, `animation-duration`, or `cubic-bezier` values.
+
+```typescript
+import { dur, ease, motion } from '../../lib/tokens';
+
+// Duration → milliseconds
+dur('fast')    // → 100
+dur('normal')  // → 200
+dur('slow')    // → 300
+
+// Easing → CSS cubic-bezier string
+ease('ease-out')    // → 'cubic-bezier(0, 0, 0.2, 1)'
+ease('ease-in-out') // → 'cubic-bezier(0.4, 0, 0.2, 1)'
+ease('spring')      // → 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+
+// Compose a full CSS transition shorthand
+motion('background-color', 'normal', 'ease-in-out')
+// → 'background-color 200ms cubic-bezier(0.4, 0, 0.2, 1)'
+
+motion('opacity', 'fast', 'ease-out', 50)
+// → 'opacity 100ms cubic-bezier(0, 0, 0.2, 1) 50ms'
+```
+
+**Duration scale:**
+
+| Key | Value | Use for |
+|-----|-------|---------|
+| `instant` | 0ms | Immediate — no animation |
+| `fast` | 100ms | Button press, toggle, icon swap |
+| `normal` | 200ms | Hover states, colour changes |
+| `slow` | 300ms | Panel open/close, drawer, sheet |
+| `slower` | 500ms | Page transitions, onboarding |
+
+**Easing scale:**
+
+| Key | Curve | Use for |
+|-----|-------|---------|
+| `linear` | `cubic-bezier(0,0,1,1)` | Progress bars, loaders |
+| `ease-in` | `cubic-bezier(0.4,0,1,1)` | Elements exiting the screen |
+| `ease-out` | `cubic-bezier(0,0,0.2,1)` | Elements entering the screen |
+| `ease-in-out` | `cubic-bezier(0.4,0,0.2,1)` | State changes on-screen |
+| `spring` | `cubic-bezier(0.175,0.885,0.32,1.275)` | Modals, badges, popovers |
+
+**In a component:**
+
+```typescript
+const buttonStyle = useMemo<CSSProperties>(() => ({
+  backgroundColor: sem('background', 'accent', theme),
+  transition: motion('background-color', 'fast', 'ease-in-out'),
+}), [theme]);
+```
 
 ---
 
