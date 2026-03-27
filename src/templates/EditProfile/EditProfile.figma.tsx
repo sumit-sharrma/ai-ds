@@ -4,7 +4,7 @@ import EditProfile from './EditProfile';
 
 figma.connect(
   EditProfile,
-  'https://www.figma.com/design/EqXU8re4hw6XM6OrwaBbu8/Project',
+  'https://www.figma.com/design/EqXU8re4hw6XM6OrwaBbu8/Project?node-id=80-164',
   {
     example: () => (
       <EditProfile
