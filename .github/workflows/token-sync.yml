@@ -1,9 +1,9 @@
 name: Token Sync (Figma → tokens.json)
 
 on:
-  # Runs every hour — picks up Figma variable changes within 60 minutes
-  schedule:
-    - cron: '0 * * * *'
+  # PAUSED — uncomment schedule block to re-enable hourly sync
+  # schedule:
+  #   - cron: '0 * * * *'
 
   # Allow manual trigger from GitHub UI for immediate sync
   workflow_dispatch:
